@@ -16,7 +16,7 @@ To get started with **HireMe**, follow the steps provided below.
 * Run the _setup.php_ file to create the database schema and default data.
 
 ### Step 3 - Run HireMe
-* Run the __
+* Run the _index.php_ file.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE0NzEwOTksLTE3ODM3NDY2NDldfQ==
+eyJoaXN0b3J5IjpbMjQwMTIwODA1LC0xNzgzNzQ2NjQ5XX0=
 -->
