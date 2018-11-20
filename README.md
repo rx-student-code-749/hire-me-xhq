@@ -1,4 +1,4 @@
-﻿# Installation Guide
+# Installation Guide
 
 To get started with **HireMe**, follow the steps provided below.
 
@@ -17,3 +17,6 @@ To get started with **HireMe**, follow the steps provided below.
 
 ### Step 3 - Run HireMe
 * Run the _index.php_ file.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIxNjA1MzY0OCwtMTc4Mzc0NjY0OV19
+-->
