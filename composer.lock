@@ -1,0 +1,111 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "853aa1f31e8d8cd0770faa9e5917ebfc",
+    "packages": [
+        {
+            "name": "gabordemooij/redbean",
+            "version": "v5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabordemooij/redbean.git",
+                "reference": "4ec3ee400bfbe4c52da4a376de9a6c338b5a8819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/4ec3ee400bfbe4c52da4a376de9a6c338b5a8819",
+                "reference": "4ec3ee400bfbe4c52da4a376de9a6c338b5a8819",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RedBeanPHP\\": "RedBeanPHP"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Gabor de Mooij",
+                    "email": "gabor@redbeanphp.com",
+                    "homepage": "https://redbeanphp.com"
+                }
+            ],
+            "description": "RedBeanPHP ORM",
+            "homepage": "https://redbeanphp.com/",
+            "keywords": [
+                "orm"
+            ],
+            "time": "2018-10-26T09:06:03+00:00"
+        },
+        {
+            "name": "o-namacode/php-utils",
+            "version": "0.0.1.006",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/o-namacode/php-utils.git",
+                "reference": "75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/o-namacode/php-utils/zipball/75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f",
+                "reference": "75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "gabordemooij/redbean": "^5.1",
+                "php-di/slim-bridge": "2.0",
+                "phpunit/phpunit": "7",
+                "slim/slim": "^3.0",
+                "slim/twig-view": "^2.4"
+            },
+            "suggest": {
+                "gabordemooij/redbean": "^5.1",
+                "php-di/slim-bridge": "2.0",
+                "slim/slim": "^3.0",
+                "slim/twig-view": "^2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Namacode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Rapheekwon Rhooms",
+                    "email": "rapheekwon@gmail.com"
+                }
+            ],
+            "description": "Namacode utilities.",
+            "time": "2018-10-10T05:31:46+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "ext-json": "*"
+    },
+    "platform-dev": []
+}

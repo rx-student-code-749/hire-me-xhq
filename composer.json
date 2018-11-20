@@ -1,0 +1,21 @@
+{
+    "name": "rx-student-code-749/info2180_project_3_trial",
+    "license": "proprietary",
+    "type": "project",
+    "require": {
+        "gabordemooij/redbean": "^5.2",
+        "o-namacode/php-utils": "*",
+        "ext-json": "*"
+    },
+    "authors": [
+        {
+            "name": "R",
+            "email": "rapheekwon@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    }
+}
