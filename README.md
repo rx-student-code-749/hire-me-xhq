@@ -4,7 +4,7 @@ To get started with **HireMe**, follow the steps provided below.
 
 ### Step 0 - Acquire a Copy of the Project Files
 * Download a copy of the project file [here](https://github.com/rx-student-code-749/hire-me-xhq/archive/master.zip).
-* Clone a copy of the project files via [https](https://github.com/rx-student-code-749/hire-me-xhq.git) or [ssh](ssh://git@github.com:rx-student-code-749/hire-me-xhq.git).
+* Clone a copy of the project files via [https](https://github.com/rx-student-code-749/hire-me-xhq.git).
 
 ### Step 1 - Database Configuration
 * Create a database on your server (make note of the name).
@@ -18,6 +18,5 @@ To get started with **HireMe**, follow the steps provided below.
 ### Step 3 - Run HireMe
 * Run the _index.php_ file.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzkwNzQyNDksLTE3ODM3NDY2NDldfQ
-==
+eyJoaXN0b3J5IjpbMTIxNjA1MzY0OCwtMTc4Mzc0NjY0OV19
 -->
