@@ -28,29 +28,23 @@ if (!array_key_exists('action', $_GET)) {
             break;
         case 'getHTML':
             if (array_key_exists('page', $data)) {
-                $f = stream_resolve_include_path(__DIR__ . "/res/html/{$data['page']}.phtml");
+                $html = $templateEngine->render($data['page']);
 
-                if (!$f)
+                if ($html === false || $html === \App\System\xTemplate::TEMPLATE_NOT_FOUND)
                     $JSONResponse->setErrorMsg("Page not Found!");
                 else
-                    if (in_array(strtolower($data['page']), $Executables)) {
+                    $JSONResponse->addUnique('html', $html);
 
-                    } else
-                        $JSONResponse->addUnique('html', file_get_contents($f));
+//                $f = stream_resolve_include_path(__DIR__ . "/res/html/{$data['page']}.phtml");
+//
+//                if (!$f)
+//                    $JSONResponse->setErrorMsg("Page not Found!");
+//                else
+//                    if (in_array(strtolower($data['page']), $Executables)) {
+//
+//                    } else
+//                        $JSONResponse->addUnique('html', file_get_contents($f));
             } else $JSONResponse->setErrorMsg("Page not defined!");
-            break;
-        case 'getFORM':
-            if (array_key_exists('form', $data)) {
-                $f = stream_resolve_include_path(__DIR__ . "/res/html/form__{$data['form']}.phtml");
-
-                if (!$f)
-                    $JSONResponse->setErrorMsg("Form not Found!");
-                else
-                    if (in_array(strtolower($data['form']), $Executables)) {
-
-                    } else
-                        $JSONResponse->addUnique('html', file_get_contents($f));
-            } else $JSONResponse->setErrorMsg("Form not defined!");
             break;
         case 'login':
             $errs = [];

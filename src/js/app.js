@@ -32,7 +32,7 @@ let App = {
                 page: page
             }).done(function (data) {
                 container.html(data.html);
-                fn(container);
+                fn(container, data);
             });
 
             container.removeClass('loading');
@@ -77,9 +77,7 @@ let App = {
 
         App.Request('isLoggedIn').done(function (data) {
             if (data.logged_in === false)
-                App.Request('getFORM', {
-                    form: 'login'
-                }).done(function (data) {
+                App.Navigate('login', function (c, data) {
                     App.Containers.main.html(data.html);
                     App.Containers.main.addClass('login');
                 });
@@ -99,10 +97,7 @@ let App = {
                 page: 'sidebar'
             }).done(function (data) {
                 App.Containers.sidebar.html(data.html);
-
-
             });
-
         },
         login(event, el) {
             App.Request('login', $(el.closest('form')).serialize()).done(function (data) {
