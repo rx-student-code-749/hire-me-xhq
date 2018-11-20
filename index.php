@@ -9,15 +9,15 @@
     <link rel="stylesheet" type="text/css" href="res/css/app.css?id=<?= filemtime(__DIR__ . "/res/css/app.css"); ?>"/>
 
     <script type="text/javascript" src="src/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="src/js/vendor/notify.js"></script>
 </head>
 <body>
 <header>
     <h1>HireMe <span id="header-title"></span></h1>
-    <a href="#" onclick="App.Actions.reloadPage()" title="Refresh Page">Refresh</a>
+    <a href="#" onclick="App.Actions.reloadApp()" >Reload App</a>
 </header>
 <main id="main-container"></main>
-<!---->
-<!--<div class="loading"></div>-->
+
 <script type="text/javascript" src="src/js/app.js?id=<?= filemtime(__DIR__ . "/src/js/app.js"); ?>"></script>
 <script type="text/javascript">
     document.onload = App.bootstrap();
