@@ -16,24 +16,37 @@ use RedBeanPHP\R;
  * @package Namacode\ArmyKnife\Traits\R
  * @method unbox
  */
-trait Model {
+trait Model
+{
     public static $config = [
         'table_name' => null
     ];
 
-    public  static function tableName () : string  {
+    public static function tableName(): string
+    {
         $tmp = get_called_class();
         $tmp = explode("\\", $tmp);
 
-        return is_null(self::$config['table_name']) ? strtolower(end($tmp)) : self::$config['table_name'];
+        return (array_key_exists('table_name', self::$config)) ?
+            (is_null(self::$config['table_name']))
+                ? strtolower(end($tmp))
+                : self::$config['table_name']
+            : strtolower(end($tmp));
+//        return is_null(self::$config['table_name']) ? strtolower(end($tmp)) : self::$config['table_name'];
     }
-    public static function foreignKey() : string {
+
+    public static function foreignKey(): string
+    {
         return self::tableName() . "_id";
     }
-    public static function findByID ($id, $snippet = null) : OODBBean {
-        return R::load(self::tableName(),$id, $snippet);
+
+    public static function findByID($id, $snippet = null): OODBBean
+    {
+        return R::load(self::tableName(), $id, $snippet);
     }
-    public function save () : int{
+
+    public function save(): int
+    {
         return R::store($this->unbox());
     }
 //    public function __call($name, $arguments)

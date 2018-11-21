@@ -12,11 +12,11 @@ abstract class EnumAwareModel extends SimpleModel implements ModelInterface
     private static function safe_guard_config()
     {
         self::$config = [
-            'table_name' => self::$config['table_name'] ?: null,
-            'table_prefix' => self::$config['table_prefix'] ?: "ENUM_",
-            'table_suffix' => self::$config['table_suffix'] ?: "",
-            'save_with_prefix' => self::$config['save_with_prefix'] ?: false,
-            'save_with_suffix' => self::$config['save_with_suffix'] ?: false,
+            'table_name' => (array_key_exists('table_name', self::$config)) ? self::$config['table_name'] : null,
+            'table_prefix' =>(array_key_exists('table_prefix', self::$config)) ?  self::$config['table_prefix'] : "ENUM_",
+            'table_suffix' => (array_key_exists('table_suffix', self::$config)) ? self::$config['table_suffix'] : "",
+            'save_with_prefix' => (array_key_exists('save_with_prefix', self::$config)) ? self::$config['save_with_prefix'] : false,
+            'save_with_suffix' =>(array_key_exists('save_with_suffix', self::$config)) ?  self::$config['save_with_suffix'] : false,
         ];
     }
 
@@ -37,8 +37,10 @@ abstract class EnumAwareModel extends SimpleModel implements ModelInterface
         $tmp = explode("\\", get_called_class());
         $tableName = strtolower(end($tmp));
 
+        if (array_key_exists('save_with_prefix', self::$config))
         if (!self::$config['save_with_prefix'])
             $tableName = str_ireplace(self::$config['table_prefix'], "", $tableName);
+        if (array_key_exists('save_with_suffix', self::$config))
         if (!self::$config['save_with_suffix'])
             $tableName = str_ireplace(self::$config['table_suffix'], "", $tableName);
         return $tableName;

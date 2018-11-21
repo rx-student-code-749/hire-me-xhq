@@ -44,17 +44,17 @@
     },
     {
         "name": "o-namacode/php-utils",
-        "version": "0.0.1.006",
-        "version_normalized": "0.0.1.006",
+        "version": "0.0.1.007",
+        "version_normalized": "0.0.1.007",
         "source": {
             "type": "git",
             "url": "https://github.com/o-namacode/php-utils.git",
-            "reference": "75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f"
+            "reference": "7768a5e243396568488a4441bf9cca79681e71ac"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/o-namacode/php-utils/zipball/75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f",
-            "reference": "75d7618a45d0ad2f0cd75ef0c72c1eca9a616f4f",
+            "url": "https://api.github.com/repos/o-namacode/php-utils/zipball/7768a5e243396568488a4441bf9cca79681e71ac",
+            "reference": "7768a5e243396568488a4441bf9cca79681e71ac",
             "shasum": ""
         },
         "require": {
@@ -74,7 +74,7 @@
             "slim/slim": "^3.0",
             "slim/twig-view": "^2.4"
         },
-        "time": "2018-10-10T05:31:46+00:00",
+        "time": "2018-11-15T16:05:26+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

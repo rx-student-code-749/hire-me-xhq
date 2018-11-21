@@ -130,6 +130,13 @@ class JSONResponse
         $this->addUnique('msg', $message);
     }
     /**
+     * @param int $status
+     */
+    public function setStatus(int $status)
+    {
+        $this->status = $status;
+    }
+    /**
      * @return int
      */
     public function getStatus(): int
