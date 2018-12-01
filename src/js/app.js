@@ -28,8 +28,8 @@ let App = {
             data: xData,
         };
 
-        console.log(xRequest);
-        console.log($.param(xRequest.data));
+        // console.log(xRequest);
+        // console.log($.param(xRequest.data));
         return $.ajax(xRequest);
     },
     Navigate(page, lvl = 1, fn = () => {}, _xpd = {}) {
@@ -40,7 +40,7 @@ let App = {
                 page: page,
                 vars: _xpd
             }).done((data) => {
-                if (data.status === 404)
+                if (data.status === 404 || data.status === 500 || data.status === 501)
                     $.notify(data.errors, 'error');
                 else {
                     document.title = data.title;
@@ -56,12 +56,13 @@ let App = {
                     fn(container, data);
 
                     if (page === "post_new_job") {
-                        tinymce.remove();
-                        tinymce.init({
-                            selector: '#description',
-                            width: 600,
-                            height: 300,
-                        });
+                        $('#description').trumbowyg();
+                        // tinymce.remove();
+                        // tinymce.init({
+                        //     selector: '#description',
+                        //     width: 600,
+                        //     height: 300,
+                        // });
                     }
 
                 }
@@ -97,17 +98,19 @@ let App = {
     },
 
     Core: {
-
         boot() {
+            App.Actions.refreshSidebar();
             App.Navigate(
                 (App.History.currentPage !== 'login' && App.History.currentPage !== 'logout')
                     ? App.History.currentPage || "dashboard"
                     : "dashboard", 2, function () {
                     App.Containers.main.addClass('xapp-running');
-                    App.Actions.refreshSidebar();
                 }, App.History.currentParams);
         },
         bootstrap() {
+            /** @Settings */
+            $.trumbowyg.svgPath = 'res/css/vendor/trumbowg/icons.svg';
+
             // console.log("App bootstrap started.");
             // App.Debug();
             App.Containers.main.empty();
@@ -117,6 +120,7 @@ let App = {
                 : App.History;
 
             App.Request('isLoggedIn').done(function (data) {
+                console.log(data);
                 if (data.logged_in === false)
                     App.Navigate('login', 0, function (c, data) {
                         App.Containers.main.html(data.html);
@@ -133,7 +137,7 @@ let App = {
         reloadApp() {
             App.Core.bootstrap();
         },
-        refreshSidebar() {
+        async refreshSidebar () {
             App.Request('getHTML', {
                 page: 'sidebar'
             }).done(function (data) {
@@ -162,27 +166,22 @@ let App = {
                     }
                 });
 
-                let fData = form.serialize();
-                fData['description'] = window.parent.tinymce.get('#description').getContent();
+                // let fData = form.serialize();
+                // fData['description'] = window.parent.tinymce.get('#description').getContent();
 
-                console.log(fData);
+                // console.log(fData);
 
-                // if (!er)
-                //     App.Request('addJob', fData).done((data) => {
-                //         if (data.status === 200) {
-                //             $.notify(data.msg, 'success');
-                //             App.Navigate('job_details', 1, function () {
-                //             }, {
-                //                 id: data.xid
-                //             });
-                //         } else if (data.status === 404)
-                //             $.notify(data.errors, 'error');
-                //         else {
-                //             data.errors.each(function (name, msg) {
-                //                 console.log(arguments);
-                //             });
-                //         }
-                //     });
+                if (!er)
+                    App.Request('addJob', form.serialize()).done((data) => {
+                        if (data.status === 200) {
+                            $.notify(data.msg, 'success');
+                            App.Navigate('job_details', 1, function () {
+                            }, {
+                                id: data.xid
+                            });
+                        } else
+                            $.notify(data.errors, 'error');
+                    });
 
             },
             apply_cancel(el, jid) {
@@ -194,13 +193,13 @@ let App = {
                         $.notify(data.msg, 'success');
                         el.toggleClass('appliedFor');
                         el.toggleClass('notAppliedFor');
-                    } else if (data.status === 404)
+                    } else //if (data.status === 404)
                         $.notify(data.errors, 'error');
-                    else {
+                    // else {
                         // data.errors.each(function (name, msg) {
                         //     console.log(arguments);
                         // });
-                    }
+                    // }
                 });
             },
         },
