@@ -164,6 +164,7 @@ class JSONResponse
     }
     public function respond()
     {
+        header("Content-Type: text/json");
         echo json_encode($this->getResponse());
     }
 }

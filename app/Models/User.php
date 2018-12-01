@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Namacode\ArmyKnife\Traits\R\TimeAwareModel;
 use RedBeanPHP\OODBBean;
 use RedBeanPHP\R;
 
@@ -8,18 +9,17 @@ use RedBeanPHP\R;
  */
 class User extends \Namacode\ArmyKnife\R\Model
 {
-    public $first_name, $last_name, $email, $hash, $username, $account_type;
+    use TimeAwareModel;
+
+    public $first_name, $last_name, $email, $hash, $username, $account_type, $telephone;
 
     public function __construct(OODBBean $bean = null)
     {
-//        if (is_null($bean))
-//            $this->bean = R::dispense(self::tableName());
-//        else if (is_int($bean))
-//            $this->bean = self::findByID($bean);
-//        else
         if (!is_null($bean))
             $this->bean = $bean;
     }
+
+
     public static function newFromArray(array $arr) : User
     {
         /** @var User $user */
@@ -32,7 +32,8 @@ class User extends \Namacode\ArmyKnife\R\Model
             }
         }
 
-        $user->hash($arr['password']);
+        if (array_key_exists('password', $arr))
+            $user->hash($arr['password']);
 
         return $user;
     }
@@ -71,7 +72,7 @@ class User extends \Namacode\ArmyKnife\R\Model
      */
     public function getFirstName()
     {
-        return $this->first_name;
+        return $this->bean->first_name;
     }
 
     /**
@@ -87,7 +88,7 @@ class User extends \Namacode\ArmyKnife\R\Model
      */
     public function getLastName()
     {
-        return $this->last_name;
+        return $this->bean->last_name;
     }
 
     /**
@@ -103,7 +104,7 @@ class User extends \Namacode\ArmyKnife\R\Model
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->bean->email;
     }
 
     /**
@@ -117,25 +118,9 @@ class User extends \Namacode\ArmyKnife\R\Model
     /**
      * @return String
      */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * @param String $salt
-     */
-    private function setSalt($salt): void
-    {
-        $this->bean->salt = $this->salt = $salt;
-    }
-
-    /**
-     * @return String
-     */
     public function getHash()
     {
-        return $this->hash;
+        return $this->bean->hash;
     }
 
     /**
@@ -151,7 +136,7 @@ class User extends \Namacode\ArmyKnife\R\Model
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->bean->username;
     }
 
     /**
@@ -163,11 +148,11 @@ class User extends \Namacode\ArmyKnife\R\Model
     }
 
     /**
-     * @return ENUM_UserAccountType
+     * @return int
      */
-    public function getAccountType()
+    public function getAccountTypeID()
     {
-        return $this->account_type;
+        return $this->bean->account_type_id;
     }
 
     /**
@@ -175,21 +160,21 @@ class User extends \Namacode\ArmyKnife\R\Model
      */
     public function setAccountType($account_type) : void
     {
-        $this->account_type = $account_type;
-        $this->bean->account_type = $account_type->unbox();
-    }
-
-    private function encrypt($string)
-    {
-        return md5(str_rot13($string));
+        $this->bean->account_type = $this->account_type = $account_type;
     }
 
     public function getID() : int
     {
-        return $this->id;
+        return $this->bean->id;
     }
 
     public function getFullName() : string {
         return $this->getFirstName() . " " . $this->getLastName();
+    }
+
+    public static function isAdministrator(int $uid)
+    {
+        $user = User::findByID($uid);
+        return ENUM_UserAccountType::is($user->box()->getAccountTypeID(), ENUM_UserAccountType::ADMIN);
     }
 }

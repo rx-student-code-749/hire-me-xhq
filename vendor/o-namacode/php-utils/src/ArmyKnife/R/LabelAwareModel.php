@@ -5,7 +5,7 @@ use Namacode\ArmyKnife\Traits\R\Model as Model_Trait;
 use RedBeanPHP\R;
 use RedBeanPHP\SimpleModel;
 
-abstract class EnumAwareModel extends SimpleModel implements ModelInterface
+abstract class LabelAwareModel extends SimpleModel implements ModelInterface
 {
     use Model_Trait;
 
@@ -13,18 +13,19 @@ abstract class EnumAwareModel extends SimpleModel implements ModelInterface
     {
         self::$config = [
             'table_name' => (array_key_exists('table_name', self::$config)) ? self::$config['table_name'] : null,
-            'table_prefix' =>(array_key_exists('table_prefix', self::$config)) ?  self::$config['table_prefix'] : "ENUM_",
+            'table_prefix' => (array_key_exists('table_prefix', self::$config)) ? self::$config['table_prefix'] : "LABEL_",
             'table_suffix' => (array_key_exists('table_suffix', self::$config)) ? self::$config['table_suffix'] : "",
             'save_with_prefix' => (array_key_exists('save_with_prefix', self::$config)) ? self::$config['save_with_prefix'] : false,
-            'save_with_suffix' =>(array_key_exists('save_with_suffix', self::$config)) ?  self::$config['save_with_suffix'] : false,
+            'save_with_suffix' => (array_key_exists('save_with_suffix', self::$config)) ? self::$config['save_with_suffix'] : false,
         ];
     }
-
-    public static function Get($name)
+    
+    public static function GetAll()
     {
         self::safe_guard_config();
-        return R::enum(self::tableName() . ":" . $name);
+        return R::findAll(self::tableName(), "ORDER BY name ASC");
     }
+    
 
     /**
      * Table prefix and suffix filtering replaces all corresponding matching strings.
@@ -39,16 +40,11 @@ abstract class EnumAwareModel extends SimpleModel implements ModelInterface
         $tableName = strtolower(end($tmp));
 
         if (array_key_exists('save_with_prefix', self::$config))
-        if (!self::$config['save_with_prefix'])
-            $tableName = str_ireplace(self::$config['table_prefix'], "", $tableName);
+            if (!self::$config['save_with_prefix'])
+                $tableName = str_ireplace(self::$config['table_prefix'], "", $tableName);
         if (array_key_exists('save_with_suffix', self::$config))
-        if (!self::$config['save_with_suffix'])
-            $tableName = str_ireplace(self::$config['table_suffix'], "", $tableName);
+            if (!self::$config['save_with_suffix'])
+                $tableName = str_ireplace(self::$config['table_suffix'], "", $tableName);
         return $tableName;
-    }
-
-    public static function List()
-    {
-        return R::enum(self::tableName());
     }
 }
