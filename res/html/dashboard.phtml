@@ -1,0 +1,34 @@
+<?php
+ $availableJobs = \App\Models\Job::GetAll();
+ 
+ $availableJobs = array_walk($availableJobs , function ($item) {
+     return (\App\Models\User_Job::relationshipExists($item, $GLOBALS['user']->id))
+ });
+ 
+?>
+
+<h2>Available Jobs</h2>
+<?php if (count(\App\Models\Job::GetAll()) > 0): ?>
+    <table>
+        <thead>
+        <tr>
+            <th>Company</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date Posted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach (\App\Models\Job::GetAll() as $bean): ?>
+            <tr>
+                <td><?= $bean->company_name ?></td>
+                <td><a href="javascript:App.Navigate('job_details', 1, ()=>{}, {id:<?= $bean->id ?>})"><?= $bean->title ?></a></td>
+                <td><?= \App\Models\LABEL_JobCategory::findByID($bean->category_id)->name ?></td>
+                <td><?= $bean->posted ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+<h4>No Jobs Available</h4>
+<?php endif; ?>

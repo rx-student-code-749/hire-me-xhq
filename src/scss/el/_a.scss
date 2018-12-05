@@ -1,0 +1,29 @@
+a {
+    text-decoration: none;
+    color: $color2;
+    
+    &:hover {
+        color: lighten($color2, 10);
+    }
+    
+    &.btn {
+        padding: .5em 1em;
+        border-radius: 2.5em;
+        background: $color3;
+        color: $color4;
+        
+        &.primary {
+            background: $primary;
+            color: $color1;
+        }
+        &.success {
+            background: $green;
+        }
+        &.warning {
+            background: $orange;
+        }
+        &.danger {
+            background: $red;
+        }
+    }
+}

@@ -3,10 +3,28 @@
 require_once __DIR__ . "/.conf/definitions.php";
 require_once __DIR__ . "/../vendor/autoload.php";
 
-require_once CONFIG_DIR__TRAILING_SLASH . "redbean.conf.php";
-
 $templateEngine = new \App\System\xTemplate(__DIR__ . "/../res/html");
-if (array_key_exists('uid', $_SESSION)) {
+$JSONResponse = new \Namacode\Utility\Responses\JSONResponse();
+
+set_exception_handler(function (/** @var Exception $e*/$e) {
+    global $JSONResponse;
+
+    $JSONResponse->addNamedErrorMessage('message', $e->getMessage());
+    $JSONResponse->addNamedErrorMessage('file', $e->getFile());
+    $JSONResponse->addNamedErrorMessage('line', $e->getLine());
+    $JSONResponse->setStatus(500);
+    $JSONResponse->respond();
+});
+set_error_handler(function ($lvl, $msg, $file, $line, $context) {
+    global $JSONResponse;
+
+    $JSONResponse->addNamedErrorMessage('message', $msg);
+    $JSONResponse->addNamedErrorMessage('line', $line);
+    $JSONResponse->addNamedErrorMessage('file', $file);
+    $JSONResponse->setStatus(500);
+});
+
+require_once CONFIG_DIR__TRAILING_SLASH . "redbean.conf.php";
+if (array_key_exists('uid', $_SESSION))
     $GLOBALS['user'] = \App\Models\User::findByID($_SESSION['uid']);
-    /** @var \App\Models\User $user */ $user = $GLOBALS['user'];
-}
+

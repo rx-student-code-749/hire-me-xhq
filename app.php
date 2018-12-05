@@ -156,12 +156,12 @@ if (!array_key_exists('action', $_GET)) {
     }
 }
 
-$req_dump = print_r($_REQUEST, TRUE);
-$fp = fopen('request.log', 'a');
-fwrite($fp, $req_dump);
-fclose($fp);
-$req_dump = print_r($JSONResponse->getResponse(), TRUE);
-$fp = fopen('response.log', 'a');
-fwrite($fp, $req_dump);
-fclose($fp);
+// $req_dump = print_r($_REQUEST, TRUE);
+// $fp = fopen('request.log', 'a');
+// fwrite($fp, $req_dump);
+// fclose($fp);//
+// $req_dump = print_r($JSONResponse->getResponse(), TRUE);
+// $fp = fopen('response.log', 'a');
+// fwrite($fp, $req_dump);
+// fclose($fp);
 $JSONResponse->respond();

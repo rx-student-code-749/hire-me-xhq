@@ -1,7 +1,7 @@
 <?php namespace App\Models;
 
+use Namacode\ArmyKnife\Traits\R\ArrayBuildableModel;
 use Namacode\ArmyKnife\Traits\R\TimeAwareModel;
-use RedBeanPHP\OODBBean;
 use RedBeanPHP\R;
 
 /**
@@ -13,14 +13,7 @@ class User extends \Namacode\ArmyKnife\R\Model
 
     public $first_name, $last_name, $email, $hash, $username, $account_type, $telephone;
 
-    public function __construct(OODBBean $bean = null)
-    {
-        if (!is_null($bean))
-            $this->bean = $bean;
-    }
-
-
-    public static function newFromArray(array $arr) : User
+    public static function FromArray(array $arr) : User
     {
         /** @var User $user */
         $user = new self(R::dispense(self::tableName()));
@@ -55,16 +48,6 @@ class User extends \Namacode\ArmyKnife\R\Model
 
     public static function verifyPassword (string $password, string $hash) : bool {
         return hash_equals($hash, crypt($password, $hash));
-    }
-
-
-    public function __toString()
-    {
-        $o = [];
-        $tmp = get_object_vars($this);
-        foreach ($tmp as $k)
-            $o[$k] = $this->{$k};
-        return json_encode($o);
     }
 
     /**
@@ -126,7 +109,7 @@ class User extends \Namacode\ArmyKnife\R\Model
     /**
      * @param String $hash
      */
-    private function setHash($hash): void
+    private function setHash($hash)
     {
         $this->bean->hash = $this->hash = $hash;
     }

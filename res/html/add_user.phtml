@@ -1,0 +1,11 @@
+<form id="register">
+    <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+    <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+    <input type="email" name="email" id="email" placeholder="Email" required>
+    <input type="tel" name="telephone" id="telephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+    <input type="password" name="password" id="password" placeholder="Password" required
+           onkeyup="App.Plugins.passwordStrengthMeter($(this).val());">
+    <span id="strengthMeter"></span>
+    <input type="password" name="cfm_password" id="cfm_password" placeholder="Confirm Password" required>
+    <a class="btn primary" href="javascript:App.Actions.User.new()">Create Account</a>
+</form>

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 \RedBeanPHP\R::fancyDebug(true);
 
-$u = \App\Models\User::newFromArray([
+$u = \App\Models\User::FromArray([
     'first_name' => "Administrator",
     'last_name' => "One",
     'email' => "admin@hireme.com",

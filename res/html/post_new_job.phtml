@@ -1,0 +1,16 @@
+<?php require_once __DIR__ . "/../../app/app.core.php"?>
+<form id="new-job">
+    <input type="text" name="title" id="title" placeholder="Job Title" required>
+    <textarea name="description" id="description" cols="30" rows="10" placeholder="Job Description" required></textarea>
+    <select name="category" id="category" title="Category" required>
+        <option selected disabled>Select a category...</option>
+<!--        --><?php //var_dump (\App\Models\LABEL_JobCategory::GetAll()) ?>
+        <?php foreach (\App\Models\LABEL_JobCategory::GetAll() as $bean): ?>
+            <option value="<?= $bean->id ?>"><?= $bean->name?></option>
+        <?php endforeach; ?>
+    </select>
+<!--    <input type="text" name="category" id="category" placeholder="Category" required onkeyup="App.Plugins.autoFillList(this, 'JobCategory')">-->
+    <input type="text" name="company_name" id="company_name" placeholder="Company Name" required>
+    <input type="text" name="company_location" id="location" placeholder="Location" required  onkeypress="if (event.keyCode === 13) App.Actions.Job.new()">
+    <a href="javascript:App.Actions.Job.new()" class="btn primary">Submit</a>
+</form>

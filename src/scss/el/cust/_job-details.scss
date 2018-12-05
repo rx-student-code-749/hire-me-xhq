@@ -1,0 +1,65 @@
+@import '../../pallete';
+
+.job-details {
+    //background: pink;
+    //overflow: auto
+    
+    .job-header {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        
+        h3.job-title {
+            align-self: start;
+        }
+        
+        ul.job-actions {
+            align-self: end;
+            text-align: end;
+            align-content: end;
+            
+            li {
+                width: auto;
+                display: inline-block;
+                
+                a {
+                    &.delete {
+                        background: $red;
+                    }
+                    &.appliedFor {
+                        background: $orange;
+                        
+                        &::after {
+                            content: 'Cancel';
+                        }
+                    }
+                    &.notAppliedFor {
+                        background: $green;
+                        
+                        &::after {
+                            content: 'Apply';
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .job-posted, .job-category{
+        display: inline-block;
+        //text-align: start;
+        color: lightslategray;
+    }
+    
+    .job-category {
+        align-self: end;
+        text-align: end;
+        align-content: end;
+        font-weight: bold;
+        color: $color4;
+        float: right;
+        clear: both;
+    }
+    
+    .job-company {
+    
+    }
+}

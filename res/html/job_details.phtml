@@ -1,0 +1,29 @@
+<?php
+$job = \App\Models\Job::findByID($id);
+    $GLOBALS['title'] = "Job Details | {$job->title}";
+?>
+
+<div class="job-details">
+    <div class="job-header">
+        <h3 class="job-title"><?= $job->title ?></h3>
+        <ul class="job-actions">
+            <li><a href="javascript:App.Actions.Job.ac(<?= $job->id ?>)"
+                    id="apply-link-btn"
+                   class="btn <?= ($job->box()->appliedFor($GLOBALS['user']->id)) ? "appliedFor" : "notAppliedFor" ?>"></a>
+            </li>
+            <?php if (\App\Models\User::isAdministrator($_SESSION['uid'])): ?>
+            <li><a href="javascript:App.Actions.Job.edit(<?= $job->id ?>)" class="btn primary">Edit</a></li>
+            <li><a href="javascript:App.Actions.Job.delete(<?= $job->id ?>)" class="btn danger">Delete</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <p class="job-posted"><?= $job->posted ?></p>
+    <p class="job-category"><?= $job->box()->getCategory()->name ?></p>
+
+    <p class="job-company"><?= $job->company_name ?></p>
+    <a class="job-location"><?= $job->company_location ?></a>
+
+    <article class="job-description">
+        <?= $job->description ?>
+    </article>
+</div>

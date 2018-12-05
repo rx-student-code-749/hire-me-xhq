@@ -20,11 +20,10 @@ abstract class LabelAwareModel extends SimpleModel implements ModelInterface
         ];
     }
     
-    public static function GetAll()
-    {
-        self::safe_guard_config();
-        return R::findAll(self::tableName(), "ORDER BY name ASC");
-    }
+
+	public static function is () : bool {
+		return false;
+	}
     
 
     /**

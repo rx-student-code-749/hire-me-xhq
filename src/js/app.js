@@ -28,7 +28,7 @@ let App = {
             data: xData,
         };
 
-        console.log(xRequest);
+        // console.log(xRequest);
         console.log($.param(xRequest.data));
         return $.ajax(xRequest);
     },
@@ -40,10 +40,25 @@ let App = {
                 page: page,
                 vars: _xpd
             }).done((data) => {
-                if (data.status === 404)
+                // if (data.status === 404 || data.status === 500 || data.status === 501)
+                //     $.notify(data.errors, 'error');
+                if ($.inArray(data.status, [
+                    404,
+                    500,
+                    501
+                ]) !== -1) {
                     $.notify(data.errors, 'error');
-                else {
+                    $("#default-style").remove();
+                    $("<link />", {
+                        rel: "stylesheet",
+                        href: "res/css/" + data.status + ".css"
+                    }).appendTo(document.head);
+                    App.Containers.main.load('res/html/' + data.status + ".html");
+                    App.Containers.header.hide();
+                    document.title = data.status;
+                } else {
                     document.title = data.title;
+                    $("#header-title").html(" &bull; " + data.title);
 
                     App.History.previousPage = App.History.currentPage;
                     App.History.currentPage = page;
@@ -56,12 +71,13 @@ let App = {
                     fn(container, data);
 
                     if (page === "post_new_job") {
-                        tinymce.remove();
-                        tinymce.init({
-                            selector: '#description',
-                            width: 600,
-                            height: 300,
-                        });
+                        $('#description').trumbowyg();
+                        // tinymce.remove();
+                        // tinymce.init({
+                        //     selector: '#description',
+                        //     width: 600,
+                        //     height: 300,
+                        // });
                     }
 
                 }
@@ -92,22 +108,24 @@ let App = {
         } else throw ErrorEvent;
     },
     Containers: {
+        header: $("#main-header"),
         main: $("#main-container"),
-        document: $(document),
     },
 
     Core: {
-
         boot() {
+            App.Actions.refreshSidebar();
             App.Navigate(
                 (App.History.currentPage !== 'login' && App.History.currentPage !== 'logout')
                     ? App.History.currentPage || "dashboard"
                     : "dashboard", 2, function () {
                     App.Containers.main.addClass('xapp-running');
-                    App.Actions.refreshSidebar();
                 }, App.History.currentParams);
         },
         bootstrap() {
+            /** @Settings */
+            $.trumbowyg.svgPath = 'res/css/vendor/trumbowg/icons.svg';
+
             // console.log("App bootstrap started.");
             // App.Debug();
             App.Containers.main.empty();
@@ -117,6 +135,7 @@ let App = {
                 : App.History;
 
             App.Request('isLoggedIn').done(function (data) {
+                console.log(data);
                 if (data.logged_in === false)
                     App.Navigate('login', 0, function (c, data) {
                         App.Containers.main.html(data.html);
@@ -133,7 +152,7 @@ let App = {
         reloadApp() {
             App.Core.bootstrap();
         },
-        refreshSidebar() {
+        async refreshSidebar () {
             App.Request('getHTML', {
                 page: 'sidebar'
             }).done(function (data) {
@@ -162,30 +181,38 @@ let App = {
                     }
                 });
 
-                let fData = form.serialize();
-                fData['description'] = window.parent.tinymce.get('#description').getContent();
+                // let fData = form.serialize();
+                // fData['description'] = window.parent.tinymce.get('#description').getContent();
 
-                console.log(fData);
+                // console.log(fData);
 
-                // if (!er)
-                //     App.Request('addJob', fData).done((data) => {
-                //         if (data.status === 200) {
-                //             $.notify(data.msg, 'success');
-                //             App.Navigate('job_details', 1, function () {
-                //             }, {
-                //                 id: data.xid
-                //             });
-                //         } else if (data.status === 404)
-                //             $.notify(data.errors, 'error');
-                //         else {
-                //             data.errors.each(function (name, msg) {
-                //                 console.log(arguments);
-                //             });
-                //         }
-                //     });
+                if (!er)
+                    App.Request('addJob', form.serialize()).done((data) => {
+                        if (data.status === 200) {
+                            $.notify(data.msg, 'success');
+                            App.Navigate('job_details', 1, function () {
+                            }, {
+                                id: data.xid
+                            });
+                        } else
+                            $.notify(data.errors, 'error');
+                    });
 
             },
-            apply_cancel(el, jid) {
+            ac(jid) {
+
+                // alert(jid);
+                let el = $("#apply-link-btn");
+                // console.log($.ajax({
+                //     url: "app.php",
+                //     data: {
+                //         action: 'applyCancelJob',
+                //         data: {
+                //             id: jid
+                //         }
+                //     },
+                // }).done((d) => console.log(d)).fail((d) => console.log(d)));
+
                 App.Request('applyCancelJob', {
                     id: jid
                 }).done((data) => {
@@ -194,13 +221,15 @@ let App = {
                         $.notify(data.msg, 'success');
                         el.toggleClass('appliedFor');
                         el.toggleClass('notAppliedFor');
-                    } else if (data.status === 404)
-                        $.notify(data.errors, 'error');
+                    } //else //if (data.status === 404)
+                        // $.notify(data.errors, 'error');
                     else {
-                        // data.errors.each(function (name, msg) {
-                        //     console.log(arguments);
-                        // });
+                        data.errors.each(function (name, msg) {
+                            console.log(arguments);
+                        });
                     }
+                }).fail(function () {
+                    console.log(arguments);
                 });
             },
         },
