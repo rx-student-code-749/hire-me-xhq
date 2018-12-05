@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" type="text/css" href="res/css/vendor/trumbowg/trumbowyg.min.css"/>
 
-    <link rel="stylesheet" type="text/css" href="res/css/app.css?id=<?= filemtime(__DIR__ . "/res/css/app.css"); ?>"/>
+    <link rel="stylesheet" type="text/css" href="res/css/app.css?id=<?= filemtime(__DIR__ . "/res/css/app.css"); ?>" id="default-style"/>
 
     <script type="text/javascript" src="src/js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="src/js/vendor/notify.js"></script>
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="src/js/vendor/trumbowg/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
 </head>
 <body>
-<header>
+<header id="main-header">
     <h1><a href="#">HireMe</a> <span id="header-title"></span></h1>
 
     <ul>

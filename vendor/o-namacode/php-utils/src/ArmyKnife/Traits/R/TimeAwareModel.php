@@ -3,8 +3,6 @@
 use RedBeanPHP\R;
 
 trait TimeAwareModel {
-    use Model;
-
     public function dispense () {
         $this->date_created = R::isoDateTime();
     }

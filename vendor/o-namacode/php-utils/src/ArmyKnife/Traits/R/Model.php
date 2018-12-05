@@ -18,6 +18,12 @@ use RedBeanPHP\R;
  */
 trait Model
 {
+    public function __construct(OODBBean $bean = null)
+    {
+        if (!is_null($bean))
+            $this->bean = $bean;
+    }
+
     public static $config = [
         'table_name' => null
     ];
@@ -49,8 +55,16 @@ trait Model
     {
         return R::store($this->unbox());
     }
-//    public function __call($name, $arguments)
-//    {
-//        var_dump($name);
-//    }
+
+    public function set (string $field_name, $value) : self
+    {
+        if (property_exists($this, $field_name))
+            $this->bean->$field_name = $this->$field_name = $value;
+        return $this;
+    }
+
+    public static function GetAll () {
+        return R::findAll(self::tableName());
+    }
+
 }

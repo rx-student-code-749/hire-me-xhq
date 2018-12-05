@@ -49,16 +49,16 @@
         },
         {
             "name": "o-namacode/php-utils",
-            "version": "0.0.1.009",
+            "version": "0.0.1.010",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o-namacode/php-utils.git",
-                "reference": "6d6274ac28f6c0a57eaf5c5d8e5433743df4db99"
+                "reference": "707a895791ac8a784487cc24e4718e7e90da6dd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o-namacode/php-utils/zipball/6d6274ac28f6c0a57eaf5c5d8e5433743df4db99",
-                "reference": "6d6274ac28f6c0a57eaf5c5d8e5433743df4db99",
+                "url": "https://api.github.com/repos/o-namacode/php-utils/zipball/707a895791ac8a784487cc24e4718e7e90da6dd7",
+                "reference": "707a895791ac8a784487cc24e4718e7e90da6dd7",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
                 }
             ],
             "description": "Namacode utilities.",
-            "time": "2018-11-20T21:09:14+00:00"
+            "time": "2018-11-21T07:00:49+00:00"
         }
     ],
     "packages-dev": [],

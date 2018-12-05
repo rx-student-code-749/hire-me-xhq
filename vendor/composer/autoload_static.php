@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite0081595b42c1b1ad0fccac038a8e1a5
+class ComposerStaticInit2fdcc679435c7936f4a647333b5184cf
 {
     public static $prefixLengthsPsr4 = array (
         'R' => 
@@ -36,11 +36,94 @@ class ComposerStaticInite0081595b42c1b1ad0fccac038a8e1a5
         ),
     );
 
+    public static $classMap = array (
+        'App\\Models\\ENUM_UserAccountType' => __DIR__ . '/../..' . '/app/Models/ENUM_UserAccountType.php',
+        'App\\Models\\Job' => __DIR__ . '/../..' . '/app/Models/Job.php',
+        'App\\Models\\LABEL_JobCategory' => __DIR__ . '/../..' . '/app/Models/LABEL_JobCategory.php',
+        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\User_Job' => __DIR__ . '/../..' . '/app/Models/User_Job.php',
+        'App\\System\\xTemplate' => __DIR__ . '/../..' . '/app/System/xTemplate.php',
+        'Namacode\\ArmyKnife\\Configuration' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Configuration.php',
+        'Namacode\\ArmyKnife\\FN' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/FN.php',
+        'Namacode\\ArmyKnife\\Handlers' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Handlers.php',
+        'Namacode\\ArmyKnife\\R\\ArrayBuildableModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/ArrayBuildableModel.php',
+        'Namacode\\ArmyKnife\\R\\BeanCentricModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/BeanCentricModel.php',
+        'Namacode\\ArmyKnife\\R\\Contracts\\ModelInterface' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/Contracts/ModelInterface.php',
+        'Namacode\\ArmyKnife\\R\\EnumAwareModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/EnumAwareModel.php',
+        'Namacode\\ArmyKnife\\R\\LabelAwareModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/LabelAwareModel.php',
+        'Namacode\\ArmyKnife\\R\\Model' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/Model.php',
+        'Namacode\\ArmyKnife\\R\\TimeAwareModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/R/TimeAwareModel.php',
+        'Namacode\\ArmyKnife\\Traits\\Noop' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/Noop.php',
+        'Namacode\\ArmyKnife\\Traits\\NoopClone' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/NoopClone.php',
+        'Namacode\\ArmyKnife\\Traits\\NoopConstructor' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/NoopConstructor.php',
+        'Namacode\\ArmyKnife\\Traits\\NoopConstructor_Singleton' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/NoopConstructor_Singleton.php',
+        'Namacode\\ArmyKnife\\Traits\\R\\ArrayBuildableModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/R/ArrayBuildableModel.php',
+        'Namacode\\ArmyKnife\\Traits\\R\\MetaModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/R/MetaModel.php',
+        'Namacode\\ArmyKnife\\Traits\\R\\Model' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/R/Model.php',
+        'Namacode\\ArmyKnife\\Traits\\R\\SelfCreatingModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/R/SelfCreatingModel.php',
+        'Namacode\\ArmyKnife\\Traits\\R\\TimeAwareModel' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/R/TimeAwareModel.php',
+        'Namacode\\ArmyKnife\\Traits\\Singleton' => __DIR__ . '/..' . '/o-namacode/php-utils/src/ArmyKnife/Traits/Singleton.php',
+        'Namacode\\Slim\\Controller\\Contract\\AJAXController' => __DIR__ . '/..' . '/o-namacode/php-utils/src/Slim/Controller/Contract/AJAXController.php',
+        'Namacode\\Utility\\Responses\\JSONResponse' => __DIR__ . '/..' . '/o-namacode/php-utils/src/Utility/Responses/JSONResponse.php',
+        'RedBeanPHP\\Adapter' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Adapter.php',
+        'RedBeanPHP\\Adapter\\DBAdapter' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Adapter/DBAdapter.php',
+        'RedBeanPHP\\AssociationManager' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/AssociationManager.php',
+        'RedBeanPHP\\BeanCollection' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/BeanCollection.php',
+        'RedBeanPHP\\BeanHelper' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/BeanHelper.php',
+        'RedBeanPHP\\BeanHelper\\SimpleFacadeBeanHelper' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/BeanHelper/SimpleFacadeBeanHelper.php',
+        'RedBeanPHP\\Cursor' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Cursor.php',
+        'RedBeanPHP\\Cursor\\NullCursor' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Cursor/NullCursor.php',
+        'RedBeanPHP\\Cursor\\PDOCursor' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Cursor/PDOCursor.php',
+        'RedBeanPHP\\Driver' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Driver.php',
+        'RedBeanPHP\\Driver\\RPDO' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Driver/RPDO.php',
+        'RedBeanPHP\\DuplicationManager' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/DuplicationManager.php',
+        'RedBeanPHP\\Facade' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Facade.php',
+        'RedBeanPHP\\Finder' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Finder.php',
+        'RedBeanPHP\\Jsonable' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/OODBBean.php',
+        'RedBeanPHP\\LabelMaker' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/LabelMaker.php',
+        'RedBeanPHP\\Logger' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Logger.php',
+        'RedBeanPHP\\Logger\\RDefault' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Logger/RDefault.php',
+        'RedBeanPHP\\Logger\\RDefault\\Debug' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Logger/RDefault/Debug.php',
+        'RedBeanPHP\\OODB' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/OODB.php',
+        'RedBeanPHP\\OODBBean' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/OODBBean.php',
+        'RedBeanPHP\\Observable' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Observable.php',
+        'RedBeanPHP\\Observer' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Observer.php',
+        'RedBeanPHP\\Plugin' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Plugin.php',
+        'RedBeanPHP\\QueryWriter' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter.php',
+        'RedBeanPHP\\QueryWriter\\AQueryWriter' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/AQueryWriter.php',
+        'RedBeanPHP\\QueryWriter\\CUBRID' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/CUBRID.php',
+        'RedBeanPHP\\QueryWriter\\Firebird' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/Firebird.php',
+        'RedBeanPHP\\QueryWriter\\MySQL' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/MySQL.php',
+        'RedBeanPHP\\QueryWriter\\PostgreSQL' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/PostgreSQL.php',
+        'RedBeanPHP\\QueryWriter\\SQLiteT' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/QueryWriter/SQLiteT.php',
+        'RedBeanPHP\\R' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/R.php',
+        'RedBeanPHP\\RedException' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/RedException.php',
+        'RedBeanPHP\\RedException\\SQL' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/RedException/SQL.php',
+        'RedBeanPHP\\Repository' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Repository.php',
+        'RedBeanPHP\\Repository\\Fluid' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Repository/Fluid.php',
+        'RedBeanPHP\\Repository\\Frozen' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Repository/Frozen.php',
+        'RedBeanPHP\\SimpleModel' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/SimpleModel.php',
+        'RedBeanPHP\\SimpleModelHelper' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/SimpleModelHelper.php',
+        'RedBeanPHP\\TagManager' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/TagManager.php',
+        'RedBeanPHP\\ToolBox' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/ToolBox.php',
+        'RedBeanPHP\\Util\\ArrayTool' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/ArrayTool.php',
+        'RedBeanPHP\\Util\\Diff' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/Diff.php',
+        'RedBeanPHP\\Util\\DispenseHelper' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/DispenseHelper.php',
+        'RedBeanPHP\\Util\\Dump' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/Dump.php',
+        'RedBeanPHP\\Util\\Look' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/Look.php',
+        'RedBeanPHP\\Util\\MatchUp' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/MatchUp.php',
+        'RedBeanPHP\\Util\\MultiLoader' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/MultiLoader.php',
+        'RedBeanPHP\\Util\\QuickExport' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/QuickExport.php',
+        'RedBeanPHP\\Util\\Transaction' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/Transaction.php',
+        'RedBeanPHP\\Util\\Tree' => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP/Util/Tree.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite0081595b42c1b1ad0fccac038a8e1a5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite0081595b42c1b1ad0fccac038a8e1a5::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2fdcc679435c7936f4a647333b5184cf::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2fdcc679435c7936f4a647333b5184cf::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2fdcc679435c7936f4a647333b5184cf::$classMap;
 
         }, null, ClassLoader::class);
     }

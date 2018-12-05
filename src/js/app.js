@@ -29,7 +29,7 @@ let App = {
         };
 
         // console.log(xRequest);
-        // console.log($.param(xRequest.data));
+        console.log($.param(xRequest.data));
         return $.ajax(xRequest);
     },
     Navigate(page, lvl = 1, fn = () => {}, _xpd = {}) {
@@ -40,10 +40,25 @@ let App = {
                 page: page,
                 vars: _xpd
             }).done((data) => {
-                if (data.status === 404 || data.status === 500 || data.status === 501)
+                // if (data.status === 404 || data.status === 500 || data.status === 501)
+                //     $.notify(data.errors, 'error');
+                if ($.inArray(data.status, [
+                    404,
+                    500,
+                    501
+                ]) !== -1) {
                     $.notify(data.errors, 'error');
-                else {
+                    $("#default-style").remove();
+                    $("<link />", {
+                        rel: "stylesheet",
+                        href: "res/css/" + data.status + ".css"
+                    }).appendTo(document.head);
+                    App.Containers.main.load('res/html/' + data.status + ".html");
+                    App.Containers.header.hide();
+                    document.title = data.status;
+                } else {
                     document.title = data.title;
+                    $("#header-title").html(" &bull; " + data.title);
 
                     App.History.previousPage = App.History.currentPage;
                     App.History.currentPage = page;
@@ -93,8 +108,8 @@ let App = {
         } else throw ErrorEvent;
     },
     Containers: {
+        header: $("#main-header"),
         main: $("#main-container"),
-        document: $(document),
     },
 
     Core: {
@@ -184,7 +199,20 @@ let App = {
                     });
 
             },
-            apply_cancel(el, jid) {
+            ac(jid) {
+
+                // alert(jid);
+                let el = $("#apply-link-btn");
+                // console.log($.ajax({
+                //     url: "app.php",
+                //     data: {
+                //         action: 'applyCancelJob',
+                //         data: {
+                //             id: jid
+                //         }
+                //     },
+                // }).done((d) => console.log(d)).fail((d) => console.log(d)));
+
                 App.Request('applyCancelJob', {
                     id: jid
                 }).done((data) => {
@@ -193,13 +221,15 @@ let App = {
                         $.notify(data.msg, 'success');
                         el.toggleClass('appliedFor');
                         el.toggleClass('notAppliedFor');
-                    } else //if (data.status === 404)
-                        $.notify(data.errors, 'error');
-                    // else {
-                        // data.errors.each(function (name, msg) {
-                        //     console.log(arguments);
-                        // });
-                    // }
+                    } //else //if (data.status === 404)
+                        // $.notify(data.errors, 'error');
+                    else {
+                        data.errors.each(function (name, msg) {
+                            console.log(arguments);
+                        });
+                    }
+                }).fail(function () {
+                    console.log(arguments);
                 });
             },
         },
