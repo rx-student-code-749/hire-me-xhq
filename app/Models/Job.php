@@ -30,7 +30,12 @@ class Job extends Model
         return false;
     }
 
+<<<<<<< HEAD
     public static function GetAll () {
         return R::findAll(self::tableName());
+=======
+    public static function GetAll ($sql = "", $binding = []) {
+        return R::findAll(self::tableName(), $sql, $binding);
+>>>>>>> ccf2bcfefd6d10c8562f32f284687310b2a9d65c
     }
 }

@@ -11,7 +11,7 @@ namespace App\System;
 
 class xTemplate
 {
-    const TEMPLATE_NOT_FOUND = "x404";
+    const TEMPLATE_NOT_FOUND = "404";
 
     private $folder;
 

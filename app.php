@@ -8,24 +8,31 @@ require_once __DIR__ . "/app/app.core.php";
 $Executables = [
 
 ];
-$JSONResponse = new \Namacode\Utility\Responses\JSONResponse();
-
 if (!array_key_exists('action', $_GET)) {
-    $JSONResponse->setErrorMsg("Action not defined!");
+    $JSONResponse->setErrorMessage("Action not defined!");
     $JSONResponse->setStatus(500);
+    $JSONResponse->addUnique('r', print_r($_REQUEST, TRUE));
+    $JSONResponse->addUnique('g', print_r($_GET, TRUE));
 } else {
-    $data = (array_key_exists('data', $_GET)) ? json_decode($_GET['data'], TRUE) : [];
+    $data = [];
+    if (array_key_exists('data', $_GET))
+        $data = json_decode($_GET['data'], TRUE);
+//    $data = (array_key_exists('data', $_GET)) ? json_decode($_GET['data'], TRUE) : [];
 
-    $tmp = [];
-    if (is_string($data))
-        parse_str($data, $tmp);
+//    $JSONResponse->addUnique('rawData', $_GET['data']);
+//    $JSONResponse->addUnique('sData', $data);
 
-    $data = $tmp ?: $data;
-//    $JSONResponse->addUnique('data', $data);
+//    $tmp = [];
+//    if (is_string($data))
+//        parse_str($data, $tmp);
+//
+//    $data = empty($tmp) ? $data : $tmp;
+//    $JSONResponse->addUnique('-data', $data);
 
     switch ($_GET['action']) {
         case 'isLoggedIn':
             $JSONResponse->addUnique('logged_in', isset ($_SESSION['uid']));
+            $JSONResponse->setStatus(\Namacode\Utility\Responses\JSONResponse::STATUS_OK);
             break;
         case 'getHTML':
             if (array_key_exists('page', $data)) {
@@ -35,7 +42,7 @@ if (!array_key_exists('action', $_GET)) {
                 ));
 
                 if ($content === false || $content === \App\System\xTemplate::TEMPLATE_NOT_FOUND) {
-                    $JSONResponse->setErrorMsg("Page not Found!");
+                    $JSONResponse->setErrorMessage("Page not Found!");
                     $JSONResponse->setStatus(404);
                 } else
                     $html = (!in_array($data['page'], [
@@ -68,7 +75,7 @@ if (!array_key_exists('action', $_GET)) {
 //
 //                    } else
 //                        $JSONResponse->addUnique('html', file_get_contents($f));
-            } else $JSONResponse->setErrorMsg("Page not defined!");
+            } else $JSONResponse->setErrorMessage("Page not defined!");
             break;
         case 'login':
             $errs = [];
@@ -91,7 +98,7 @@ if (!array_key_exists('action', $_GET)) {
 
 
                 if (!$bean)
-                    $JSONResponse->addNamedErrorMsg('username', "Username/Email not found!");
+                    $JSONResponse->addNamedErrorMessage('username', "Username/Email not found!");
                 else {
                     if (User::verifyPassword($data['password'], $bean->hash)) {
                         $_SESSION['uid'] = (int)$bean->id;
@@ -108,7 +115,7 @@ if (!array_key_exists('action', $_GET)) {
             $JSONResponse->setSuccessMessage('User successfully logged out.');
             break;
         case 'addUser':
-            $user = User::newFromArray(array_merge(
+            $user = User::FromArray(array_merge(
                 $data,
                 [
                     'account_type'
@@ -120,42 +127,57 @@ if (!array_key_exists('action', $_GET)) {
                 $JSONResponse->setSuccessMessage("{$user->getFullName()} added successfully!");
                 $JSONResponse->addUnique('xid', $user->getID());
             } else
-                $JSONResponse->setErrorMsg('An error occurred while creating the user. No changes saved.');
+                $JSONResponse->setErrorMessage('An error occurred while creating the user. No changes saved.');
             break;
         case 'addJob':
             $data['category'] = \App\Models\LABEL_JobCategory::findByID($data['category']);
-            $job = \App\Models\Job::newFromArray($data);
+            $job = \App\Models\Job::FromArray($data);
 
             if ($job->save()) {
                 $JSONResponse->setSuccessMessage("Job successfully posted!");
                 $JSONResponse->addUnique('xid', $job->id);
             } else
-                $JSONResponse->setErrorMsg('An error occurred while creating the user. No changes saved.');
+                $JSONResponse->setErrorMessage('An error occurred while creating the user. No changes saved.');
             break;
         case 'applyCancelJob':
-            if (array_key_exists('uid', $_SESSION)) {
-                $JSONResponse->addUnique('reach', true);
-                $user = User::findByID($_SESSION['uid']);
-                $job = \App\Models\Job::findByID($data['id'] ?: 1);
-                if ($job->box()->appliedFor($user->id)) {
-                    $JSONResponse->setErrorMessage('Cancel');
-                } else {
-                    $user->ownJobList[] = $job;
-                    if ($user->box()->save())
-                        $JSONResponse->setSuccessMessage('Job applied for successfully!');
-                }
+            if (!array_key_exists('id', $data))
+                $JSONResponse->setErrorMessage('An error occurred!');
+            else {
+                if (array_key_exists('uid', $_SESSION)) {
+//                    $JSONResponse->addUnique('reach', true);
+                    $user = $GLOBALS['user']->box();
+                    $job = \App\Models\Job::findByID($data['id'])->box();
 
-                $JSONResponse->addUnique('test[user]', $user);
-                $JSONResponse->addUnique('test[job]', $job);
-                $JSONResponse->addUnique('test[job->appliedFor]', $job->box()->appliedFor($user->id));
+                    if (\App\Models\User_Job::relationshipExists($user, $job)) {
+                        if (\App\Models\User_Job::severRelationship($user, $job))
+                            $JSONResponse->setSuccessMessage('Job application cancelled successfully!');
+                    } else {
+                        if (\App\Models\User_Job::newRelationship($user, $job))
+                            $JSONResponse->setSuccessMessage('Job applied for successfully!');
+                    }
+//                if (\App\Models\User_Job::relationshipExists($user->box(), $job->box()))
+//                    $JSONResponse->addUnique('result', (\App\Models\User_Job::relationshipExists($user->box(), $job->box())));
+//                if ($job->box()->appliedFor($user->id)) {
+//                    $JSONResponse->setErrorMessage('Cancel');
+//                } else {
+//                    $user->ownJobList[] = $job;
+//                    if ($user->box()->save())
+//                        $JSONResponse->setSuccessMessage('Job applied for successfully!');
+//                }
+
+//                    $JSONResponse->addUnique('test[user]', $user->__toJSON());
+//                    $JSONResponse->addUnique('test[job]', $job->box()->__toJSON());
+//                    $JSONResponse->addUnique('test[job->appliedFor]', $job->box()->appliedFor($user->id));
+                }
             }
             break;
         default:
-            $JSONResponse->setErrorMsg('404.1 An error occurred!');
+            $JSONResponse->setErrorMessage('404.1 An error occurred!');
             $JSONResponse->setStatus(404);
     }
 }
 
+<<<<<<< HEAD
 // $req_dump = print_r($_REQUEST, TRUE);
 // $fp = fopen('request.log', 'a');
 // fwrite($fp, $req_dump);
@@ -164,4 +186,15 @@ if (!array_key_exists('action', $_GET)) {
 // $fp = fopen('response.log', 'a');
 // fwrite($fp, $req_dump);
 // fclose($fp);
+=======
+//$req_dump = print_r($_REQUEST, TRUE);
+//$fp = fopen('request.log', 'a');
+//fwrite($fp, $req_dump);
+//fclose($fp);
+//$req_dump = print_r($JSONResponse->getResponse(), TRUE);
+//$fp = fopen('response.log', 'a');
+//fwrite($fp, $req_dump);
+//fclose($fp);
+//
+>>>>>>> ccf2bcfefd6d10c8562f32f284687310b2a9d65c
 $JSONResponse->respond();
