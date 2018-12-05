@@ -6,7 +6,8 @@
  });
  
 ?>
-
+<div id = "head"></div>
+<h1>Dashboard</h1> <input type="button" id="post" value="Post a Job" onclick=""/>
 <h2>Available Jobs</h2>
 <?php if (count(\App\Models\Job::GetAll()) > 0): ?>
     <table>
