@@ -1,35 +1,70 @@
-<?php
- $availableJobs = \App\Models\Job::GetAll();
- 
- $availableJobs = array_walk($availableJobs , function ($item) {
-     return (\App\Models\User_Job::relationshipExists($item, $GLOBALS['user']->id))
- });
- 
-?>
-<div id = "head"></div>
-<h1>Dashboard</h1> <input type="button" id="post" value="Post a Job" onclick=""/>
-<h2>Available Jobs</h2>
-<?php if (count(\App\Models\Job::GetAll()) > 0): ?>
-    <table>
-        <thead>
-        <tr>
-            <th>Company</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Date Posted</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach (\App\Models\Job::GetAll() as $bean): ?>
+<div>
+    <h2>Available Jobs</h2>
+    <?php $jobs = \App\Models\Job::GetAll(); ?>
+    <?php if (count($jobs) > 0): ?>
+        <table>
+            <thead>
             <tr>
-                <td><?= $bean->company_name ?></td>
-                <td><a href="javascript:App.Navigate('job_details', 1, ()=>{}, {id:<?= $bean->id ?>})"><?= $bean->title ?></a></td>
-                <td><?= \App\Models\LABEL_JobCategory::findByID($bean->category_id)->name ?></td>
-                <td><?= $bean->posted ?></td>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Date Posted</th>
             </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-<h4>No Jobs Available</h4>
-<?php endif; ?>
+            </thead>
+            <tbody>
+            <?php foreach ($jobs as $bean): ?>
+                <tr>
+                    <td><?= $bean->company_name ?></td>
+                    <td>
+                        <a href="javascript:App.Navigate('job_details', 1, ()=>{}, {id:<?= $bean->id ?>})"><?= $bean->title ?></a>
+                    </td>
+                    <td><?= \App\Models\LABEL_JobCategory::findByID($bean->category_id)->name ?></td>
+                    <td><?= $bean->date_created ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <h1>No Jobs Available</h1>
+    <?php endif; ?>
+
+</div>
+<div>
+    <h2>Jobs Applications</h2>
+    <?php
+    $jobs_ = \App\Models\User_Job::GetAll();
+    ?>
+    <?php if (count($jobs_) > 0): ?>
+        <table>
+            <thead>
+            <tr>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Date Posted</th>
+            </tr>
+            </thead>
+            <tbody>
+                <pre>
+            <?php foreach ($jobs_ as $b): 
+            if ($b->user_id == $_SESSION['uid'])
+                $bean = \App\Models\Job::findByID($b->job_id);
+            else 
+                continue;
+            ?>
+                <tr>
+                    <td><?= $bean->company_name ?></td>
+                    <td>
+                        <a href="javascript:App.Navigate('job_details', 1, ()=>{}, {id:<?= $bean->id ?>})"><?= $bean->title ?></a>
+                    </td>
+                    <td><?= \App\Models\LABEL_JobCategory::findByID($bean->category_id)->name ?></td>
+                    <td><?= $bean->date_created ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <h1>No Jobs Applied For</h1>
+    <?php endif; ?>
+
+</div>

@@ -1,10 +1,11 @@
 <ul>
-    <li><?= $user->getFullName() ?></li>
+    <li><a href="javascript:App.FN._ni()"><i class="fas fa-user"></i>&nbsp;<?= $user->getFullName() ?></a></li>
     <li><a href="javascript:App.Navigate('dashboard')"><i class="fas fa-home"></i>&nbsp;Home</a></li>
     <?php if (\App\Models\User::isAdministrator($_SESSION['uid'])): ?>
     <li><a href="javascript:App.Navigate('add_user')"><i class="fas fa-user-plus"></i>&nbsp;Add User</a></li>
     <li><a href="javascript:App.Navigate('post_new_job')"><i class="fas fa-edit"></i>&nbsp;New Job</a></li>
     <?php endif; ?>
     <li><a href="javascript:App.Navigate(App.History.previousPage, 1, ()=>{}, App.History.previousParams)"><i class="fas fa-arrow-circle-left"></i>&nbsp;Previous Page</a></li>
+    <li><a href="setup.php"><i class="fas fa-cog"></i>&nbsp;Setup</a></li>
     <li><a href="javascript:App.Actions.User.logout()"><i class="fas fa-power-off"></i>&nbsp;Logout</a></li>
 </ul>

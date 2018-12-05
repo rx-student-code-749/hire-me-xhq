@@ -22,9 +22,11 @@ if (!array_key_exists('action', $_GET)) {
 //    $JSONResponse->addUnique('rawData', $_GET['data']);
 //    $JSONResponse->addUnique('sData', $data);
 
-//    $tmp = [];
-//    if (is_string($data))
-//        parse_str($data, $tmp);
+    $tmp = [];
+    if (is_string($data))
+        parse_str($data, $tmp);
+        if (!empty($tmp))
+        $data = $tmp;
 //
 //    $data = empty($tmp) ? $data : $tmp;
 //    $JSONResponse->addUnique('-data', $data);
@@ -177,16 +179,6 @@ if (!array_key_exists('action', $_GET)) {
     }
 }
 
-<<<<<<< HEAD
-// $req_dump = print_r($_REQUEST, TRUE);
-// $fp = fopen('request.log', 'a');
-// fwrite($fp, $req_dump);
-// fclose($fp);//
-// $req_dump = print_r($JSONResponse->getResponse(), TRUE);
-// $fp = fopen('response.log', 'a');
-// fwrite($fp, $req_dump);
-// fclose($fp);
-=======
 //$req_dump = print_r($_REQUEST, TRUE);
 //$fp = fopen('request.log', 'a');
 //fwrite($fp, $req_dump);
@@ -196,5 +188,4 @@ if (!array_key_exists('action', $_GET)) {
 //fwrite($fp, $req_dump);
 //fclose($fp);
 //
->>>>>>> ccf2bcfefd6d10c8562f32f284687310b2a9d65c
 $JSONResponse->respond();

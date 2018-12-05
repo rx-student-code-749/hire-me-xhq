@@ -27,15 +27,10 @@ class Job extends Model
     }
 
     public function appliedFor (int $uid) {
-        return false;
+        return User_Job::relationshipExists(User::findByID($uid)->box(), $this);
     }
 
-<<<<<<< HEAD
-    public static function GetAll () {
-        return R::findAll(self::tableName());
-=======
     public static function GetAll ($sql = "", $binding = []) {
         return R::findAll(self::tableName(), $sql, $binding);
->>>>>>> ccf2bcfefd6d10c8562f32f284687310b2a9d65c
     }
 }
